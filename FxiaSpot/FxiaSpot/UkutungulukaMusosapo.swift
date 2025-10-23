@@ -1,9 +1,3 @@
-//
-//  UkutungulukaMusosapo.swift
-//  FxiaSpot
-//
-//  Refactored with table view data source pattern
-//
 
 import UIKit
 import SnapKit

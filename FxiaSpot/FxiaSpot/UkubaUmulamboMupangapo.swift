@@ -1,9 +1,3 @@
-//
-//  UkubaUmulamboMupangapo.swift
-//  FxiaSpot
-//
-//  Refactored with observer pattern and state machine
-//
 
 import Foundation
 
@@ -75,9 +69,9 @@ class UkubaUmulamboMupangapo {
     }
 
     func ipupaMalilaUmuzunguluko(lyashi: Bool) -> Int {
-        guard case .ipupaCinso = ipupaUkuba else {
+        // 如果状态是初始状态，先转换到游戏中状态
+        if case .ipupaTontola = ipupaUkuba {
             ipupaUkuba = .ipupaCinso(ifyalulwa: 0, ukupitilizya: 0, mizunguluko: 0)
-            return 0
         }
 
         if lyashi {

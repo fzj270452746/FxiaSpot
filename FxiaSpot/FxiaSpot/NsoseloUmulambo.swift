@@ -1,9 +1,3 @@
-//
-//  NsoseloUmulambo.swift
-//  FxiaSpot
-//
-//  Refactored with builder pattern and configuration objects
-//
 
 import UIKit
 
