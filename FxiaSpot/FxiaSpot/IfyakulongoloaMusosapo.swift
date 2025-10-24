@@ -9,7 +9,9 @@ class IfyakulongoloaMusosapo: UIViewController {
     private lazy var ipupaMutweView: UIView = {
         let v = UIView()
         v.backgroundColor = ipupaNsoselo.ipupaTwalaLangiCard()
-        ipupaNsoselo.ipupaBikaShadow(paBwino: v, opacity: 0.3, radius: 8)
+        v.layer.borderWidth = 1
+        v.layer.borderColor = UIColor(white: 1.0, alpha: 0.2).cgColor
+        ipupaNsoselo.ipupaBikaShadow(paBwino: v, opacity: 0.3, radius: 10)
         return v
     }()
 
@@ -25,9 +27,13 @@ class IfyakulongoloaMusosapo: UIViewController {
     private lazy var ipupaMutwe: UILabel = {
         let l = UILabel()
         l.text = "⚙️ Settings"
-        l.font = ipupaNsoselo.ipupaBulukaFontMutwe(ubunene: 28)
+        l.font = ipupaNsoselo.ipupaBulukaFontMutwe(ubunene: 32)
         l.textColor = ipupaNsoselo.ipupaTwalaLangiGold()
         l.textAlignment = .center
+
+        // 添加发光效果
+        ipupaNsoselo.ipupaBikaGlow(paBwino: l, langi: ipupaNsoselo.ipupaTwalaLangiGold(), radius: 16, opacity: 0.6)
+
         return l
     }()
 
@@ -42,7 +48,13 @@ class IfyakulongoloaMusosapo: UIViewController {
     private lazy var ipupaCikansamboInstructions: UIButton = {
         let b = UIButton(type: .system)
         b.setTitle("📖 How to Play", for: .normal)
-        b.ipupaBikaStyleSecondary()
+        b.setTitleColor(ipupaNsoselo.ipupaTwalaLangiText(), for: .normal)
+        b.titleLabel?.font = ipupaNsoselo.ipupaBulukaFontCikansambo(ubunene: 18)
+        b.backgroundColor = ipupaNsoselo.ipupaTwalaLangiCard()
+        b.layer.cornerRadius = 28  // 胶囊形状
+        b.layer.borderWidth = 2
+        b.layer.borderColor = ipupaNsoselo.ipupaTwalaLangiSecondary().withAlphaComponent(0.4).cgColor
+        ipupaNsoselo.ipupaBikaShadow(paBwino: b, opacity: 0.3, radius: 10)
         b.addTarget(self, action: #selector(ipupaSongeshaInstructions), for: .touchUpInside)
         return b
     }()
@@ -50,7 +62,13 @@ class IfyakulongoloaMusosapo: UIViewController {
     private lazy var ipupaCikansamboRate: UIButton = {
         let b = UIButton(type: .system)
         b.setTitle("⭐️ Rate This Game", for: .normal)
-        b.ipupaBikaStyleSecondary()
+        b.setTitleColor(ipupaNsoselo.ipupaTwalaLangiText(), for: .normal)
+        b.titleLabel?.font = ipupaNsoselo.ipupaBulukaFontCikansambo(ubunene: 18)
+        b.backgroundColor = ipupaNsoselo.ipupaTwalaLangiCard()
+        b.layer.cornerRadius = 28  // 胶囊形状
+        b.layer.borderWidth = 2
+        b.layer.borderColor = ipupaNsoselo.ipupaTwalaLangiSecondary().withAlphaComponent(0.4).cgColor
+        ipupaNsoselo.ipupaBikaShadow(paBwino: b, opacity: 0.3, radius: 10)
         b.addTarget(self, action: #selector(ipupaRate), for: .touchUpInside)
         return b
     }()
@@ -58,7 +76,13 @@ class IfyakulongoloaMusosapo: UIViewController {
     private lazy var ipupaCikansamboFeedback: UIButton = {
         let b = UIButton(type: .system)
         b.setTitle("💬 Send Feedback", for: .normal)
-        b.ipupaBikaStyleSecondary()
+        b.setTitleColor(ipupaNsoselo.ipupaTwalaLangiText(), for: .normal)
+        b.titleLabel?.font = ipupaNsoselo.ipupaBulukaFontCikansambo(ubunene: 18)
+        b.backgroundColor = ipupaNsoselo.ipupaTwalaLangiCard()
+        b.layer.cornerRadius = 28  // 胶囊形状
+        b.layer.borderWidth = 2
+        b.layer.borderColor = ipupaNsoselo.ipupaTwalaLangiSecondary().withAlphaComponent(0.4).cgColor
+        ipupaNsoselo.ipupaBikaShadow(paBwino: b, opacity: 0.3, radius: 10)
         b.addTarget(self, action: #selector(ipupaFeedback), for: .touchUpInside)
         return b
     }()
@@ -84,14 +108,14 @@ class IfyakulongoloaMusosapo: UIViewController {
         ipupaContent.addSubview(ipupaCikansamboRate)
         ipupaContent.addSubview(ipupaCikansamboFeedback)
 
-        ipupaMutweView.snp.makeConstraints { $0.top.left.right.equalToSuperview(); $0.height.equalTo(120) }
-        ipupaCikansamBuyafye.snp.makeConstraints { $0.top.equalTo(view.safeAreaLayoutGuide).offset(10); $0.left.equalToSuperview().offset(20); $0.height.equalTo(44) }
+        ipupaMutweView.snp.makeConstraints { $0.top.left.right.equalToSuperview(); $0.height.equalTo(130) }
+        ipupaCikansamBuyafye.snp.makeConstraints { $0.top.equalTo(view.safeAreaLayoutGuide).offset(12); $0.left.equalToSuperview().offset(20); $0.height.equalTo(44) }
         ipupaMutwe.snp.makeConstraints { $0.centerY.equalTo(ipupaCikansamBuyafye); $0.centerX.equalToSuperview() }
         ipupaScroll.snp.makeConstraints { $0.top.equalTo(ipupaMutweView.snp.bottom); $0.left.right.equalToSuperview(); $0.bottom.equalTo(view.safeAreaLayoutGuide) }
         ipupaContent.snp.makeConstraints { $0.edges.equalToSuperview(); $0.width.equalTo(view) }
-        ipupaCikansamboInstructions.snp.makeConstraints { $0.top.equalToSuperview().offset(30); $0.left.equalToSuperview().offset(40); $0.right.equalToSuperview().offset(-40); $0.height.equalTo(50) }
-        ipupaCikansamboRate.snp.makeConstraints { $0.top.equalTo(ipupaCikansamboInstructions.snp.bottom).offset(20); $0.left.right.height.equalTo(ipupaCikansamboInstructions) }
-        ipupaCikansamboFeedback.snp.makeConstraints { $0.top.equalTo(ipupaCikansamboRate.snp.bottom).offset(20); $0.left.right.height.equalTo(ipupaCikansamboInstructions); $0.bottom.equalToSuperview().offset(-30) }
+        ipupaCikansamboInstructions.snp.makeConstraints { $0.top.equalToSuperview().offset(40); $0.left.equalToSuperview().offset(50); $0.right.equalToSuperview().offset(-50); $0.height.equalTo(56) }
+        ipupaCikansamboRate.snp.makeConstraints { $0.top.equalTo(ipupaCikansamboInstructions.snp.bottom).offset(24); $0.left.right.height.equalTo(ipupaCikansamboInstructions) }
+        ipupaCikansamboFeedback.snp.makeConstraints { $0.top.equalTo(ipupaCikansamboRate.snp.bottom).offset(24); $0.left.right.height.equalTo(ipupaCikansamboInstructions); $0.bottom.equalToSuperview().offset(-40) }
     }
 
     @objc private func ipupaBuyafyedwa() {

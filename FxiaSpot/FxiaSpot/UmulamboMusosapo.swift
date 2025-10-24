@@ -26,11 +26,13 @@ class UmulamboMusosapo: UIViewController {
     private let ipupaNsoselo = NsoseloUmulamboMupangapo.ipupaShared
     private lazy var ipupaGradient = ipupaNsoselo.ipupaBulukaGradient(ubwalwa: .zero)
 
-    // UI
+    // UI - 顶部栏使用半透明毛玻璃效果
     private lazy var ipupaMutweView: UIView = {
         let v = UIView()
         v.backgroundColor = ipupaNsoselo.ipupaTwalaLangiCard()
-        ipupaNsoselo.ipupaBikaShadow(paBwino: v, opacity: 0.3, radius: 8)
+        v.layer.borderWidth = 1
+        v.layer.borderColor = UIColor(white: 1.0, alpha: 0.2).cgColor
+        ipupaNsoselo.ipupaBikaShadow(paBwino: v, opacity: 0.3, radius: 10)
         return v
     }()
 
@@ -46,19 +48,27 @@ class UmulamboMusosapo: UIViewController {
     private lazy var ipupaItondoIfyalulwa: UILabel = {
         let l = UILabel()
         l.text = "Score: 0"
-        l.font = ipupaNsoselo.ipupaBulukaFontMutwe(ubunene: 22)
+        l.font = ipupaNsoselo.ipupaBulukaFontMutwe(ubunene: 26)
         l.textColor = ipupaNsoselo.ipupaTwalaLangiGold()
         l.textAlignment = .center
+
+        // 添加发光效果
+        ipupaNsoselo.ipupaBikaGlow(paBwino: l, langi: ipupaNsoselo.ipupaTwalaLangiGold(), radius: 8, opacity: 0.6)
+
         return l
     }()
 
     private lazy var ipupaItondoUkupitilizya: UILabel = {
         let l = UILabel()
         l.text = ""
-        l.font = ipupaNsoselo.ipupaBulukaFontCikansambo(ubunene: 16)
+        l.font = ipupaNsoselo.ipupaBulukaFontCikansambo(ubunene: 18)
         l.textColor = ipupaNsoselo.ipupaTwalaLangiAccent()
         l.textAlignment = .center
         l.alpha = 0
+
+        // 添加发光效果
+        ipupaNsoselo.ipupaBikaGlow(paBwino: l, langi: ipupaNsoselo.ipupaTwalaLangiAccent(), radius: 10, opacity: 0.8)
+
         return l
     }()
 
@@ -80,8 +90,14 @@ class UmulamboMusosapo: UIViewController {
 
     private lazy var ipupaCikansamboUpya: UIButton = {
         let b = UIButton(type: .system)
-        b.setTitle("New Round", for: .normal)
-        b.ipupaBikaStyleSecondary()
+        b.setTitle("🔄 New Round", for: .normal)
+        b.setTitleColor(ipupaNsoselo.ipupaTwalaLangiText(), for: .normal)
+        b.titleLabel?.font = ipupaNsoselo.ipupaBulukaFontCikansambo(ubunene: 18)
+        b.backgroundColor = ipupaNsoselo.ipupaTwalaLangiCard()
+        b.layer.cornerRadius = 28  // 胶囊形状
+        b.layer.borderWidth = 2
+        b.layer.borderColor = ipupaNsoselo.ipupaTwalaLangiAccent().withAlphaComponent(0.5).cgColor
+        ipupaNsoselo.ipupaBikaGlow(paBwino: b, langi: ipupaNsoselo.ipupaTwalaLangiAccent(), radius: 12, opacity: 0.4)
         b.addTarget(self, action: #selector(ipupaUpyaShitedwa), for: .touchUpInside)
         return b
     }()
@@ -127,13 +143,13 @@ class UmulamboMusosapo: UIViewController {
     }
 
     private func ipupaPangaConstraints() {
-        ipupaMutweView.snp.makeConstraints { $0.top.left.right.equalToSuperview(); $0.height.equalTo(140) }
-        ipupaCikansamPitya.snp.makeConstraints { $0.top.equalTo(view.safeAreaLayoutGuide).offset(10); $0.left.equalToSuperview().offset(20); $0.width.height.equalTo(44) }
-        ipupaItondoIfyalulwa.snp.makeConstraints { $0.top.equalTo(view.safeAreaLayoutGuide).offset(20); $0.centerX.equalToSuperview() }
-        ipupaItondoUkupitilizya.snp.makeConstraints { $0.top.equalTo(ipupaItondoIfyalulwa.snp.bottom).offset(8); $0.centerX.equalToSuperview() }
+        ipupaMutweView.snp.makeConstraints { $0.top.left.right.equalToSuperview(); $0.height.equalTo(150) }
+        ipupaCikansamPitya.snp.makeConstraints { $0.top.equalTo(view.safeAreaLayoutGuide).offset(12); $0.left.equalToSuperview().offset(20); $0.width.height.equalTo(44) }
+        ipupaItondoIfyalulwa.snp.makeConstraints { $0.top.equalTo(view.safeAreaLayoutGuide).offset(24); $0.centerX.equalToSuperview() }
+        ipupaItondoUkupitilizya.snp.makeConstraints { $0.top.equalTo(ipupaItondoIfyalulwa.snp.bottom).offset(10); $0.centerX.equalToSuperview() }
         ipupaAkatambo.snp.makeConstraints { $0.center.equalToSuperview(); $0.width.height.equalTo(ipupaBalaUbuneneAkatambo()) }
-        ipupaItondoKambi.snp.makeConstraints { $0.bottom.equalTo(ipupaCikansamboUpya.snp.top).offset(-20); $0.left.equalToSuperview().offset(30); $0.right.equalToSuperview().offset(-30) }
-        ipupaCikansamboUpya.snp.makeConstraints { $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20); $0.left.equalToSuperview().offset(40); $0.right.equalToSuperview().offset(-40); $0.height.equalTo(50) }
+        ipupaItondoKambi.snp.makeConstraints { $0.bottom.equalTo(ipupaCikansamboUpya.snp.top).offset(-24); $0.left.equalToSuperview().offset(30); $0.right.equalToSuperview().offset(-30) }
+        ipupaCikansamboUpya.snp.makeConstraints { $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-25); $0.left.equalToSuperview().offset(50); $0.right.equalToSuperview().offset(-50); $0.height.equalTo(56) }
     }
 
     private func ipupaBalaUbuneneAkatambo() -> CGFloat {
@@ -156,7 +172,7 @@ class UmulamboMusosapo: UIViewController {
         ipupaFyabwino.removeAll()
 
         let ubunene = ipupaStrategy.ipupaUbuneneAkatambo
-        let spacing: CGFloat = 8
+        let spacing: CGFloat = 12  // 增加间距以适应新设计
         let containerSize = ipupaBalaUbuneneAkatambo()
         let tileSize = (containerSize - CGFloat(ubunene - 1) * spacing) / CGFloat(ubunene)
 
@@ -218,9 +234,23 @@ class UmulamboMusosapo: UIViewController {
 
     private func ipupaBumbaItondo() {
         ipupaItondoIfyalulwa.text = "Score: \(ipupaUkuba.ipupaTwalaIfyalulwaNomba())"
+
+        // 添加弹跳动画
+        let bounce = CAKeyframeAnimation(keyPath: "transform.scale")
+        bounce.values = [1.0, 1.15, 0.95, 1.05, 1.0]
+        bounce.keyTimes = [0.0, 0.3, 0.5, 0.8, 1.0]
+        bounce.duration = 0.5
+        ipupaItondoIfyalulwa.layer.add(bounce, forKey: "bounce")
+
         if ipupaUkuba.ipupaTwalaUkupitilizyaNomba() >= 3 {
             ipupaItondoUkupitilizya.text = "🔥 Combo x\(ipupaUkuba.ipupaTwalaUkupitilizyaNomba())"
             UIView.animate(withDuration: 0.3) { self.ipupaItondoUkupitilizya.alpha = 1 }
+
+            // 组合标签弹出动画
+            let pop = CAKeyframeAnimation(keyPath: "transform.scale")
+            pop.values = [1.0, 1.2, 1.0]
+            pop.duration = 0.3
+            ipupaItondoUkupitilizya.layer.add(pop, forKey: "pop")
         } else {
             UIView.animate(withDuration: 0.3) { self.ipupaItondoUkupitilizya.alpha = 0 }
         }
@@ -250,7 +280,10 @@ class UmulamboMusosapo: UIViewController {
 
         let container = UIView()
         container.backgroundColor = ipupaNsoselo.ipupaTwalaLangiCard()
-        container.layer.cornerRadius = 20
+        container.layer.cornerRadius = 24
+        container.layer.borderWidth = 1.5
+        container.layer.borderColor = UIColor(white: 1.0, alpha: 0.3).cgColor
+        ipupaNsoselo.ipupaBikaShadow(paBwino: container, opacity: 0.4, radius: 20)
         view.addSubview(container)
 
         let mutwe = UILabel()

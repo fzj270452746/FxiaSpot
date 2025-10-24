@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C0E7F8AD-8C02-4F2D-8439-0324E4F295F1"
+            uuid = "E27DDF9A-F817-461C-AB53-EAB4FA1D93A6"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FxiaSpot/NgandaMusosapo.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
-            landmarkName = "ipupaPangaConstraints()"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
+            landmarkName = "ipupaPangaBwino()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -11,7 +11,9 @@ class UkutungulukaMusosapo: UIViewController {
     private lazy var ipupaMutweView: UIView = {
         let v = UIView()
         v.backgroundColor = ipupaNsoselo.ipupaTwalaLangiCard()
-        ipupaNsoselo.ipupaBikaShadow(paBwino: v, opacity: 0.3, radius: 8)
+        v.layer.borderWidth = 1
+        v.layer.borderColor = UIColor(white: 1.0, alpha: 0.2).cgColor
+        ipupaNsoselo.ipupaBikaShadow(paBwino: v, opacity: 0.3, radius: 10)
         return v
     }()
 
@@ -27,9 +29,13 @@ class UkutungulukaMusosapo: UIViewController {
     private lazy var ipupaMutwe: UILabel = {
         let l = UILabel()
         l.text = "🏆 Leaderboard"
-        l.font = ipupaNsoselo.ipupaBulukaFontMutwe(ubunene: 28)
+        l.font = ipupaNsoselo.ipupaBulukaFontMutwe(ubunene: 32)
         l.textColor = ipupaNsoselo.ipupaTwalaLangiGold()
         l.textAlignment = .center
+
+        // 添加发光效果
+        ipupaNsoselo.ipupaBikaGlow(paBwino: l, langi: ipupaNsoselo.ipupaTwalaLangiGold(), radius: 16, opacity: 0.6)
+
         return l
     }()
 
@@ -38,6 +44,9 @@ class UkutungulukaMusosapo: UIViewController {
         s.selectedSegmentIndex = 0
         s.backgroundColor = ipupaNsoselo.ipupaTwalaLangiCard()
         s.selectedSegmentTintColor = ipupaNsoselo.ipupaTwalaLangiSecondary()
+        s.layer.cornerRadius = 12
+        s.layer.borderWidth = 1.5
+        s.layer.borderColor = UIColor(white: 1.0, alpha: 0.3).cgColor
         s.addTarget(self, action: #selector(ipupaIcibaboBumbwa), for: .valueChanged)
         return s
     }()
@@ -71,11 +80,11 @@ class UkutungulukaMusosapo: UIViewController {
         view.addSubview(ipupaSegment)
         view.addSubview(ipupaTable)
 
-        ipupaMutweView.snp.makeConstraints { $0.top.left.right.equalToSuperview(); $0.height.equalTo(120) }
-        ipupaCikansamBuyafye.snp.makeConstraints { $0.top.equalTo(view.safeAreaLayoutGuide).offset(10); $0.left.equalToSuperview().offset(20); $0.height.equalTo(44) }
+        ipupaMutweView.snp.makeConstraints { $0.top.left.right.equalToSuperview(); $0.height.equalTo(130) }
+        ipupaCikansamBuyafye.snp.makeConstraints { $0.top.equalTo(view.safeAreaLayoutGuide).offset(12); $0.left.equalToSuperview().offset(20); $0.height.equalTo(44) }
         ipupaMutwe.snp.makeConstraints { $0.centerY.equalTo(ipupaCikansamBuyafye); $0.centerX.equalToSuperview() }
-        ipupaSegment.snp.makeConstraints { $0.top.equalTo(ipupaMutweView.snp.bottom).offset(20); $0.left.equalToSuperview().offset(30); $0.right.equalToSuperview().offset(-30); $0.height.equalTo(40) }
-        ipupaTable.snp.makeConstraints { $0.top.equalTo(ipupaSegment.snp.bottom).offset(20); $0.left.right.equalToSuperview(); $0.bottom.equalTo(view.safeAreaLayoutGuide) }
+        ipupaSegment.snp.makeConstraints { $0.top.equalTo(ipupaMutweView.snp.bottom).offset(24); $0.left.equalToSuperview().offset(40); $0.right.equalToSuperview().offset(-40); $0.height.equalTo(44) }
+        ipupaTable.snp.makeConstraints { $0.top.equalTo(ipupaSegment.snp.bottom).offset(24); $0.left.right.equalToSuperview(); $0.bottom.equalTo(view.safeAreaLayoutGuide) }
     }
 
     private func ipupaTwalaFyalulwa() {
@@ -105,7 +114,7 @@ extension UkutungulukaMusosapo: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
+        return 84  // 增加高度以适应更大的圆角
     }
 }
 
@@ -120,19 +129,24 @@ class IpupaCell: UITableViewCell {
         backgroundColor = .clear
         selectionStyle = .none
 
+        // 使用更圆润的卡片
         ipupaContainer.backgroundColor = ipupaNsoselo.ipupaTwalaLangiCard()
-        ipupaContainer.layer.cornerRadius = 12
+        ipupaContainer.layer.cornerRadius = 22
+        ipupaContainer.layer.borderWidth = 1.5
+        ipupaContainer.layer.borderColor = UIColor(white: 1.0, alpha: 0.2).cgColor
+        ipupaNsoselo.ipupaBikaShadow(paBwino: ipupaContainer, opacity: 0.25, radius: 10)
+
         contentView.addSubview(ipupaContainer)
         ipupaContainer.addSubview(ipupaRank)
         ipupaContainer.addSubview(ipupaScore)
 
-        ipupaContainer.snp.makeConstraints { $0.top.equalToSuperview().offset(5); $0.bottom.equalToSuperview().offset(-5); $0.left.equalToSuperview().offset(20); $0.right.equalToSuperview().offset(-20) }
-        ipupaRank.snp.makeConstraints { $0.left.equalToSuperview().offset(15); $0.centerY.equalToSuperview(); $0.width.equalTo(50) }
-        ipupaScore.snp.makeConstraints { $0.left.equalTo(ipupaRank.snp.right).offset(15); $0.centerY.equalToSuperview() }
+        ipupaContainer.snp.makeConstraints { $0.top.equalToSuperview().offset(8); $0.bottom.equalToSuperview().offset(-8); $0.left.equalToSuperview().offset(20); $0.right.equalToSuperview().offset(-20) }
+        ipupaRank.snp.makeConstraints { $0.left.equalToSuperview().offset(24); $0.centerY.equalToSuperview(); $0.width.equalTo(60) }
+        ipupaScore.snp.makeConstraints { $0.left.equalTo(ipupaRank.snp.right).offset(20); $0.centerY.equalToSuperview() }
 
-        ipupaRank.font = ipupaNsoselo.ipupaBulukaFontMutwe(ubunene: 24)
+        ipupaRank.font = ipupaNsoselo.ipupaBulukaFontMutwe(ubunene: 26)
         ipupaRank.textAlignment = .center
-        ipupaScore.font = ipupaNsoselo.ipupaBulukaFontMutwe(ubunene: 20)
+        ipupaScore.font = ipupaNsoselo.ipupaBulukaFontMutwe(ubunene: 22)
         ipupaScore.textColor = ipupaNsoselo.ipupaTwalaLangiText()
     }
 
@@ -145,24 +159,27 @@ class IpupaCell: UITableViewCell {
 
         if rank == 1 {
             ipupaRank.text = "🥇"
-            ipupaContainer.backgroundColor = UIColor(red: 1.0, green: 0.84, blue: 0.0, alpha: 0.2)
-            ipupaContainer.layer.borderWidth = 2
+            ipupaContainer.backgroundColor = UIColor(red: 1.0, green: 0.84, blue: 0.0, alpha: 0.15)
+            ipupaContainer.layer.borderWidth = 2.5
             ipupaContainer.layer.borderColor = ipupaNsoselo.ipupaTwalaLangiGold().cgColor
+            // 添加发光效果
+            ipupaNsoselo.ipupaBikaGlow(paBwino: ipupaContainer, langi: ipupaNsoselo.ipupaTwalaLangiGold(), radius: 12, opacity: 0.4)
         } else if rank == 2 {
             ipupaRank.text = "🥈"
-            ipupaContainer.backgroundColor = UIColor(white: 0.75, alpha: 0.15)
+            ipupaContainer.backgroundColor = UIColor(white: 0.75, alpha: 0.12)
             ipupaContainer.layer.borderWidth = 2
             ipupaContainer.layer.borderColor = UIColor(white: 0.75, alpha: 0.5).cgColor
         } else if rank == 3 {
             ipupaRank.text = "🥉"
-            ipupaContainer.backgroundColor = UIColor(red: 0.8, green: 0.5, blue: 0.2, alpha: 0.15)
+            ipupaContainer.backgroundColor = UIColor(red: 0.8, green: 0.5, blue: 0.2, alpha: 0.12)
             ipupaContainer.layer.borderWidth = 2
             ipupaContainer.layer.borderColor = UIColor(red: 0.8, green: 0.5, blue: 0.2, alpha: 0.5).cgColor
         } else {
             ipupaRank.text = "#\(rank)"
             ipupaRank.textColor = ipupaNsoselo.ipupaTwalaLangiTextSecondary()
             ipupaContainer.backgroundColor = ipupaNsoselo.ipupaTwalaLangiCard()
-            ipupaContainer.layer.borderWidth = 0
+            ipupaContainer.layer.borderWidth = 1
+            ipupaContainer.layer.borderColor = UIColor(white: 1.0, alpha: 0.2).cgColor
         }
     }
 }

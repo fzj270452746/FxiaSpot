@@ -4,7 +4,11 @@
       "Bash(xcodebuild -list:*)",
       "Bash(ruby -e:*)",
       "Bash(xcodebuild:*)",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "Bash(mkdir:*)",
+      "Bash(tree:*)",
+      "Bash(awk '{print $9, \"\"\"\"(\"\"\"\" $5 \"\"\"\")\"\"\"\"}')",
+      "Bash(cat:*)"
     ],
     "deny": [],
     "ask": []
